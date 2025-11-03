@@ -444,8 +444,9 @@ boolean LTR303::getLux(byte gain, byte integrationTime, unsigned int CH0, unsign
 	d0 = CH0; d1 = CH1;
 
 	// We will need the ratio for subsequent calculations
-	ratio = d1 / d0;
-
+	//ratio = d1 / d0;
+	// I could be wrong but According to the elusive Appendix A for this device, https://forums.adafruit.com/viewtopic.php?t=216847 it looks like the ratio is CH1/(CH0+CH1) ie not just one over the other!
+	ratio = d1 / (d1+d0);
 	// Normalize for integration time
 	d0 *= (402.0/integrationTime);
 	d1 *= (402.0/integrationTime);
